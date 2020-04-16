@@ -30,14 +30,15 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ["~plugins/b-components"],
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     "@nuxtjs/eslint-module",
-    "@nuxtjs/style-resources"
+    "@nuxtjs/style-resources",
+    "nuxtjs-mdi-font"
   ],
   /*
    ** Nuxt.js modules
