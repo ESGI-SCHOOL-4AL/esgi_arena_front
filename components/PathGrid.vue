@@ -76,14 +76,13 @@ export default {
       this.canvas.fillStyle = "#FF0000"
       this.canvas.lineWidth = 10
 
+      this.canvas.beginPath()
       if (this.path.length === 1) {
         const x = this.path[0].x * this.squareWidth + this.squareWidth / 2
         const y = this.path[0].y * this.squareHeight + this.squareHeight / 2
         this.canvas.moveTo(x - 5, y)
         this.canvas.lineTo(x + 5, y)
       } else {
-        this.canvas.beginPath()
-
         for (let i = 0; i < this.path.length; i++) {
           const x = this.path[i].x * this.squareWidth + this.squareWidth / 2
           const y = this.path[i].y * this.squareHeight + this.squareHeight / 2
