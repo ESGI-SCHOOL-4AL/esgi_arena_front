@@ -10,6 +10,7 @@ export default {
   props: {
     terrain: { type: Array, required: true },
     path: { type: Array, required: true },
+    dest: { type: Object, required: true },
     width: { type: Number, default: 400 },
     height: { type: Number, default: 400 }
   },
@@ -42,14 +43,15 @@ export default {
     draw() {
       this.clearCanvas()
       this.drawTerrain()
+      this.drawDest()
       this.drawPath()
     },
     clearCanvas() {
       this.canvas.clearRect(0, 0, this.width, this.height)
     },
     drawTerrain() {
-      this.canvas.strokeStyle = "#000000"
-      this.canvas.fillStyle = "#000000"
+      this.canvas.strokeStyle = "#363636"
+      this.canvas.fillStyle = "#363636"
       this.canvas.lineWidth = 1
       for (let i = 0; i < this.terrain.length; i++) {
         for (let j = 0; j < this.terrain[i].length; j++) {
@@ -71,9 +73,17 @@ export default {
         }
       }
     },
+    drawDest() {
+      const x = this.dest.x * this.squareWidth + this.squareWidth / 2
+      const y = this.dest.y * this.squareHeight + this.squareHeight / 2
+      this.canvas.fillStyle = "#48c774"
+      this.canvas.beginPath()
+      this.canvas.arc(x, y, this.squareWidth / 3, 0, 2 * Math.PI, false)
+      this.canvas.fill()
+    },
     drawPath() {
-      this.canvas.strokeStyle = "#FF0000"
-      this.canvas.fillStyle = "#FF0000"
+      this.canvas.strokeStyle = "#ff3860"
+      this.canvas.fillStyle = "#ff3860"
       this.canvas.lineWidth = 10
 
       this.canvas.beginPath()

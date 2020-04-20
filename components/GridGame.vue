@@ -1,6 +1,6 @@
 <template>
   <div class="grid-game">
-    <path-grid :terrain="terrain" :path="path" />
+    <path-grid :terrain="terrain" :path="path" :dest="{ x: 3, y: 3 }" />
     <move-controls @movePressed="onMovePressed" />
   </div>
 </template>
