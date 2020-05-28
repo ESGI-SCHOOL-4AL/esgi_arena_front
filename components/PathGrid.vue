@@ -21,10 +21,10 @@ export default {
   },
   computed: {
     squareWidth() {
-      return this.width / this.terrain.length
+      return Math.ceil(this.width / this.terrain.length)
     },
     squareHeight() {
-      return this.height / this.terrain.length
+      return Math.ceil(this.height / this.terrain.length)
     }
   },
   watch: {

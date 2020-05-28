@@ -37,10 +37,10 @@ export default {
     Object.assign(this.dest, level.end)
   },
   mounted() {
-    window.addEventListener("keyup", this.onKeyPress)
+    window.addEventListener("keydown", this.onKeyPress)
   },
   beforeDestroy() {
-    window.removeEventListener("keyup", this.onKeyPress)
+    window.removeEventListener("keydown", this.onKeyPress)
   },
   methods: {
     onKeyPress(e) {
