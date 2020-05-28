@@ -32,11 +32,22 @@ export default {
   beforeMount() {
     const level = Generator.generate(15)
     this.terrain = level.grid
-    Object.assign(this.currentPos, level.ends.start)
-    Object.assign(this.path[0], level.ends.start)
-    Object.assign(this.dest, level.ends.end)
+    Object.assign(this.currentPos, level.start)
+    Object.assign(this.path[0], level.start)
+    Object.assign(this.dest, level.end)
+  },
+  mounted() {
+    window.addEventListener("keyup", this.onKeyPress)
+  },
+  beforeDestroy() {
+    window.removeEventListener("keyup", this.onKeyPress)
   },
   methods: {
+    onKeyPress(e) {
+      if (e.code.indexOf("Arrow") === 0) {
+        this.onMovePressed(e.code.substring(5).toLowerCase())
+      }
+    },
     onMovePressed(direction) {
       const newPos = Object.assign({}, this.currentPos)
       switch (direction) {

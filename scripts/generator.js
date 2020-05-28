@@ -1,32 +1,72 @@
 export default {
   generate(size) {
-    const ends = this.generateEnds(size)
-    const grid = new Array(size).fill(0).map(() => new Array(size).fill(0))
+    const start = this.generateStart(size)
+    const grid = new Array(size).fill(0).map(() => new Array(size).fill(true))
 
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        grid[y][x] =
-          Math.floor(Math.random() * 3) > 1 && !this.isEnd(ends, x, y)
+    const end = this.maze(grid, start)
+
+    return { grid, start, end }
+  },
+  maze(grid, pos) {
+    let end = { x: 0, y: 0 }
+    const stack = [pos]
+    while (stack.length) {
+      const next = stack.pop()
+      if (this.validNextNode(grid, next)) {
+        grid[next.y][next.x] = false
+        const neighbors = this.findNeighbors(next, grid.length)
+        while (neighbors.length) {
+          const i = Math.floor(Math.random() * neighbors.length)
+          const n = neighbors[i]
+          neighbors.splice(i, 1)
+          stack.push(n)
+        }
+        end = next
       }
     }
-
-    return { grid, ends }
+    return end
   },
-  isEnd(ends, x, y) {
-    return (
-      (ends.start.x === x && ends.start.y === y) ||
-      (ends.end.x === x && ends.end.y === y)
-    )
+  validNextNode(grid, next) {
+    let neighborCount = 0
+    for (let y = next.y - 1; y < next.y + 2; y++) {
+      for (let x = next.x - 1; x < next.x + 2; x++) {
+        if (
+          this.inGrid(grid.length, x, y) &&
+          this.notNode(next, x, y) &&
+          !grid[y][x]
+        ) {
+          neighborCount++
+        }
+      }
+    }
+    return neighborCount < 3 && grid[next.y][next.x]
   },
-  generateEnds(size) {
-    const start = this.randomCorner(size)
-
-    let end = { x: 0, y: 0 }
-    do {
-      end = this.randomCorner(size)
-    } while (end.x === start.x && end.y === start.y)
-
-    return { start, end }
+  findNeighbors(node, size) {
+    const neighbors = []
+    for (let y = node.y - 1; y < node.y + 2; y++) {
+      for (let x = node.x - 1; x < node.x + 2; x++) {
+        if (
+          this.inGrid(size, x, y) &&
+          this.notCorner(node, x, y) &&
+          this.notNode(node, x, y)
+        ) {
+          neighbors.push({ x, y })
+        }
+      }
+    }
+    return neighbors
+  },
+  inGrid(size, x, y) {
+    return x >= 0 && y >= 0 && x < size && y < size
+  },
+  notCorner(node, x, y) {
+    return x === node.x || y === node.y
+  },
+  notNode(node, x, y) {
+    return !(x === node.x && y === node.y)
+  },
+  generateStart(size) {
+    return this.randomCorner(size)
   },
   randomCorner(size) {
     size--

@@ -43,8 +43,8 @@ export default {
     draw() {
       this.clearCanvas()
       this.drawTerrain()
-      this.drawDest()
       this.drawPath()
+      this.drawDest()
     },
     clearCanvas() {
       this.canvas.clearRect(0, 0, this.width, this.height)
