@@ -1,6 +1,6 @@
 <template>
   <div class="grid-game">
-    <path-grid :terrain="terrain" :path="path" :dest="{ x: 3, y: 3 }" />
+    <path-grid :terrain="terrain" :path="path" :dest="dest" />
     <move-controls @movePressed="onMovePressed" />
   </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
 import MoveControls from "~/components/MoveControls.vue"
 import PathGrid from "~/components/PathGrid.vue"
+import Generator from "~/scripts/generator.js"
 
 export default {
   name: "GridGame",
@@ -24,8 +25,16 @@ export default {
         [0, 0, 0, 0]
       ],
       path: [{ x: 0, y: 0 }],
-      currentPos: { x: 0, y: 0 }
+      currentPos: { x: 0, y: 0 },
+      dest: { x: 0, y: 0 }
     }
+  },
+  beforeMount() {
+    const level = Generator.generate(15)
+    this.terrain = level.grid
+    Object.assign(this.currentPos, level.ends.start)
+    Object.assign(this.path[0], level.ends.start)
+    Object.assign(this.dest, level.ends.end)
   },
   methods: {
     onMovePressed(direction) {

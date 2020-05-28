@@ -53,17 +53,11 @@ export default {
       this.canvas.strokeStyle = "#363636"
       this.canvas.fillStyle = "#363636"
       this.canvas.lineWidth = 1
+      this.canvas.strokeRect(0, 0, this.width, this.height)
       for (let i = 0; i < this.terrain.length; i++) {
         for (let j = 0; j < this.terrain[i].length; j++) {
           if (this.terrain[i][j]) {
             this.canvas.fillRect(
-              j * this.squareWidth,
-              i * this.squareHeight,
-              this.squareWidth,
-              this.squareHeight
-            )
-          } else {
-            this.canvas.strokeRect(
               j * this.squareWidth,
               i * this.squareHeight,
               this.squareWidth,
