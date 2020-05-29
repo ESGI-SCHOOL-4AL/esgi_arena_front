@@ -77,7 +77,7 @@ export default {
   },
   randomCorner(size) {
     size--
-    switch (Math.floor(Math.random() * 4)) {
+    switch (Math.floor(Math.random() * 5)) {
       case 0:
         return { x: 0, y: 0 }
       case 1:
@@ -86,6 +86,8 @@ export default {
         return { x: 0, y: size }
       case 3:
         return { x: size, y: size }
+      case 4:
+        return { x: Math.floor(size / 2), y: Math.floor(size / 2) }
     }
   }
 }
