@@ -24,14 +24,27 @@ export default {
   data() {
     return {
       terrain: [
-        [0, 0, 0, 1],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
         [0, 0, 0, 0]
       ],
       path: [{ x: 0, y: 0 }],
       currentPos: { x: 0, y: 0 },
       dest: { x: 0, y: 0 }
+    }
+  },
+  watch: {
+    currentPos: {
+      handler(val) {
+        if (
+          this.currentPos.x === this.dest.x &&
+          this.currentPos.y === this.dest.y
+        ) {
+          this.reset()
+        }
+      },
+      deep: true
     }
   },
   beforeMount() {
@@ -45,7 +58,9 @@ export default {
   },
   methods: {
     reset() {
-      const level = Generator.generate(15)
+      const size = Math.floor(Math.random() * 11 + 10)
+      console.log(size)
+      const level = Generator.generate(size)
       this.terrain = level.grid
       this.path = [{ x: 0, y: 0 }]
       Object.assign(this.currentPos, level.start)
