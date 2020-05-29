@@ -59,7 +59,6 @@ export default {
   methods: {
     reset() {
       const size = Math.floor(Math.random() * 11 + 10)
-      console.log(size)
       const level = Generator.generate(size)
       this.terrain = level.grid
       this.path = [{ x: 0, y: 0 }]
