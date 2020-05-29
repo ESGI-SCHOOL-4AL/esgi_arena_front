@@ -1,5 +1,38 @@
 @import "vars/colors";
 
+.control-button {
+  width: 40px;
+  height: 40px;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-appearance: none;
+  align-items: center;
+  display: inline-flex;
+  font-size: 1rem;
+  line-height: 1.5;
+  position: relative;
+  padding: 0;
+  margin: 0 20px;
+  border: none;
+  border-radius: 50%;
+  box-shadow: none;
+  background: transparent;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.15);
+  }
+}
+
+.control-button-row {
+  display: flex;
+  justify-content: center;
+}
+
 :focus {
   outline: none;
 }

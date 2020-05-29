@@ -1,7 +1,12 @@
 <template>
   <div class="grid-game">
     <path-grid :terrain="terrain" :path="path" :dest="dest" />
-    <move-controls @movePressed="onMovePressed" />
+    <div>
+      <move-controls @movePressed="onMovePressed" />
+      <button class="control-button" @click="reset()">
+        <b-icon icon="refresh" size="is-large" icon-size="mdi-36px" />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -30,11 +35,7 @@ export default {
     }
   },
   beforeMount() {
-    const level = Generator.generate(15)
-    this.terrain = level.grid
-    Object.assign(this.currentPos, level.start)
-    Object.assign(this.path[0], level.start)
-    Object.assign(this.dest, level.end)
+    this.reset()
   },
   mounted() {
     window.addEventListener("keydown", this.onKeyPress)
@@ -43,6 +44,14 @@ export default {
     window.removeEventListener("keydown", this.onKeyPress)
   },
   methods: {
+    reset() {
+      const level = Generator.generate(15)
+      this.terrain = level.grid
+      this.path = [{ x: 0, y: 0 }]
+      Object.assign(this.currentPos, level.start)
+      Object.assign(this.path[0], level.start)
+      Object.assign(this.dest, level.end)
+    },
     onKeyPress(e) {
       if (e.code.indexOf("Arrow") === 0) {
         this.onMovePressed(e.code.substring(5).toLowerCase())
