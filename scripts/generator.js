@@ -8,11 +8,18 @@ export default {
     return { grid, start, end }
   },
   maze(grid, pos) {
+    let depth = 1
+    let maxDepth = 0
     let end = { x: 0, y: 0 }
     const stack = [pos]
     while (stack.length) {
       const next = stack.pop()
+      depth--
       if (this.validNextNode(grid, next)) {
+        if (depth > maxDepth) {
+          end = next
+          maxDepth = depth
+        }
         grid[next.y][next.x] = false
         const neighbors = this.findNeighbors(next, grid.length)
         while (neighbors.length) {
@@ -20,8 +27,8 @@ export default {
           const n = neighbors[i]
           neighbors.splice(i, 1)
           stack.push(n)
+          depth++
         }
-        end = next
       }
     }
     return end
