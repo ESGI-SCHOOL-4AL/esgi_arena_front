@@ -78,14 +78,14 @@ export default {
     drawPath() {
       this.canvas.strokeStyle = "#ff3860"
       this.canvas.fillStyle = "#ff3860"
-      this.canvas.lineWidth = 10
+      this.canvas.lineWidth = this.squareWidth / 2
 
       this.canvas.beginPath()
       if (this.path.length === 1) {
         const x = this.path[0].x * this.squareWidth + this.squareWidth / 2
         const y = this.path[0].y * this.squareHeight + this.squareHeight / 2
-        this.canvas.moveTo(x - 5, y)
-        this.canvas.lineTo(x + 5, y)
+        this.canvas.moveTo(x - this.canvas.lineWidth / 2, y)
+        this.canvas.lineTo(x + this.canvas.lineWidth / 2, y)
       } else {
         for (let i = 0; i < this.path.length; i++) {
           const x = this.path[i].x * this.squareWidth + this.squareWidth / 2
