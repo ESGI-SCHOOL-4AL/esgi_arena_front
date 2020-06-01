@@ -31,7 +31,18 @@ export default {
         }
       }
     }
+    this.branch(grid)
     return end
+  },
+  branch(grid) {
+    const chances = Math.floor(grid.length / 1.5)
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid.length; j++) {
+        if (grid[i][j] && Math.floor(Math.random() * chances) === chances - 1) {
+          grid[i][j] = false
+        }
+      }
+    }
   },
   validNextNode(grid, next) {
     let neighborCount = 0
