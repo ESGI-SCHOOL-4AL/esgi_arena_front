@@ -1,5 +1,8 @@
 <template>
   <div class="grid-game">
+    <div>
+      <span class="moves-counter">{{ path.length - 1 }} moves</span>
+    </div>
     <path-grid :terrain="terrain" :path="path" :dest="dest" />
     <div>
       <move-controls @movePressed="onMovePressed" />

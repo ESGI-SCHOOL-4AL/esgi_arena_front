@@ -70,9 +70,13 @@ export default {
     drawDest() {
       const x = this.dest.x * this.squareWidth + this.squareWidth / 2
       const y = this.dest.y * this.squareHeight + this.squareHeight / 2
-      this.canvas.fillStyle = "#48c774"
+      this.canvas.fillStyle = "#247540"
       this.canvas.beginPath()
-      this.canvas.arc(x, y, this.squareWidth / 3, 0, 2 * Math.PI, false)
+      this.canvas.arc(x, y, this.squareWidth / 2.25, 0, 2 * Math.PI, false)
+      this.canvas.fill()
+      this.canvas.beginPath()
+      this.canvas.fillStyle = "#48c774"
+      this.canvas.arc(x, y, this.squareWidth / 4.5, 0, 2 * Math.PI, false)
       this.canvas.fill()
     },
     drawPath() {
