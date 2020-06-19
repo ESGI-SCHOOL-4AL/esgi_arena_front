@@ -1,8 +1,10 @@
 <template>
   <div class="grid-game">
     <div class="moves-counter-container is-flex">
-      <span class="moves-counter is-size-5">{{ path.length - 1 }} moves</span>
-      <button class="control-button" @click="reset()">
+      <span class="moves-counter is-size-5">
+        {{ path.length - 1 }} déplacements
+      </span>
+      <button class="control-button" title="Réinitialiser" @click="reset()">
         <b-icon icon="refresh" size="is-large" icon-size="mdi-36px" />
       </button>
     </div>

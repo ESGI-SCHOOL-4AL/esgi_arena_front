@@ -3,6 +3,7 @@
     <div class="control-button-row">
       <button
         class="control-button"
+        title="Haut"
         @mousedown="$emit('movePressed', 'up')"
         @mouseup="$emit('moveReleased', 'up')"
       >
@@ -12,6 +13,7 @@
     <div class="control-button-row">
       <button
         class="control-button"
+        title="Gauche"
         @mousedown="$emit('movePressed', 'left')"
         @mouseup="$emit('moveReleased', 'left')"
       >
@@ -19,6 +21,7 @@
       </button>
       <button
         class="control-button"
+        title="Droite"
         @mousedown="$emit('movePressed', 'right')"
         @mouseup="$emit('moveReleased', 'right')"
       >
@@ -28,6 +31,7 @@
     <div class="control-button-row">
       <button
         class="control-button"
+        title="Bas"
         @mousedown="$emit('movePressed', 'down')"
         @mouseup="$emit('moveReleased', 'down')"
       >
