@@ -1,13 +1,15 @@
 <template>
   <div class="baguenaudier">
-    <span v-for="(val, index) in grid" :key="index" class="baguenaudier-box">
+    <span v-for="(val, index) in grid" :key="index" class="field">
       <input
         v-model="grid[index].checked"
-        :value="val.checked"
+        class="is-checkradio is-large"
         type="checkbox"
+        :value="val.checked"
         :disabled="val.disabled"
-        @change="onChange"
+        :name="'baguenaudier-box-' + index"
       />
+      <label :for="'baguenaudier-box-' + index" @click="onClick(val)"></label>
     </span>
   </div>
 </template>
@@ -31,6 +33,12 @@ export default {
     this.onChange()
   },
   methods: {
+    onClick(val) {
+      if (!val.disabled) {
+        val.checked = !val.checked
+        this.onChange()
+      }
+    },
     onChange() {
       if (this.checkVictory()) {
         for (let i = 0; i < this.grid.length; i++) {
@@ -70,3 +78,28 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.field:last-child {
+  label {
+    margin-right: 0;
+  }
+}
+
+.is-checkradio[type="checkbox"].is-large + label {
+  padding-left: 2.25rem;
+  padding-right: 0;
+}
+
+.is-checkradio[type="checkbox"].is-large + label::after,
+.is-checkradio[type="checkbox"].is-large + label::after {
+  width: 1.75rem;
+  height: 1.75rem;
+  top: 0.25rem;
+  left: 0.25rem;
+  transform: rotate(0);
+  border: none;
+  border-radius: 4px;
+  background-color: $primary;
+}
+</style>

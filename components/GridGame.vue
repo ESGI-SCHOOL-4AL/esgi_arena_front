@@ -1,14 +1,14 @@
 <template>
   <div class="grid-game">
-    <div>
-      <span class="moves-counter">{{ path.length - 1 }} moves</span>
+    <div class="moves-counter-container is-flex">
+      <span class="moves-counter is-size-5">{{ path.length - 1 }} moves</span>
+      <button class="control-button" @click="reset()">
+        <b-icon icon="refresh" size="is-large" icon-size="mdi-36px" />
+      </button>
     </div>
     <path-grid :terrain="terrain" :path="path" :dest="dest" />
     <div>
       <move-controls @movePressed="onMovePressed" />
-      <button class="control-button" @click="reset()">
-        <b-icon icon="refresh" size="is-large" icon-size="mdi-36px" />
-      </button>
     </div>
   </div>
 </template>
@@ -137,3 +137,18 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.moves-counter-container {
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+
+  .moves-counter {
+    align-self: center;
+  }
+
+  .control-button {
+    margin: 0;
+  }
+}
+</style>

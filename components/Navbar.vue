@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <nuxt-link to="/" class="navbar-item is-size-2">
         ESGI ARENA
@@ -20,12 +20,12 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
+            <nuxt-link to="/register" class="button is-primary">
               <strong>Inscription</strong>
-            </a>
-            <a class="button is-light">
+            </nuxt-link>
+            <nuxt-link to="/login" class="button is-light">
               Connexion
-            </a>
+            </nuxt-link>
           </div>
         </div>
       </div>

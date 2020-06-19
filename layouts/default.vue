@@ -2,7 +2,8 @@
   <div class="is-flex is-flex-column">
     <b-navbar />
     <section class="main-content">
-      <nuxt />
+      <nuxt v-if="!$slots.default" />
+      <slot />
     </section>
   </div>
 </template>
