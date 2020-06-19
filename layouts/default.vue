@@ -2,8 +2,8 @@
   <div class="is-flex is-flex-column">
     <b-navbar />
     <section class="main-content">
-      <nuxt v-if="!$slots.default" />
-      <slot />
+      <nuxt />
+      <!-- TODO refactor include hero -->
     </section>
   </div>
 </template>

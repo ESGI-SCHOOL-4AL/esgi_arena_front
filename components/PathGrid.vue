@@ -1,5 +1,5 @@
 <template>
-  <div class="path-grid">
+  <div class="path-grid is-flex is-centered">
     <canvas ref="canvas" :width="width" :height="height"></canvas>
   </div>
 </template>
@@ -33,6 +33,16 @@ export default {
     },
     path() {
       this.draw()
+    },
+    width() {
+      this.$nextTick(() => {
+        this.draw()
+      })
+    },
+    height() {
+      this.$nextTick(() => {
+        this.draw()
+      })
     }
   },
   mounted() {

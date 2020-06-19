@@ -6,7 +6,13 @@
         <b-icon icon="refresh" size="is-large" icon-size="mdi-36px" />
       </button>
     </div>
-    <path-grid :terrain="terrain" :path="path" :dest="dest" />
+    <path-grid
+      :terrain="terrain"
+      :path="path"
+      :dest="dest"
+      :width="width"
+      :height="height"
+    />
     <div>
       <move-controls @movePressed="onMovePressed" />
     </div>
@@ -24,8 +30,13 @@ export default {
     MoveControls,
     PathGrid
   },
+  props: {
+    restartOnComplete: { type: Boolean, default: true }
+  },
   data() {
     return {
+      width: 400,
+      height: 400,
       terrain: [
         [0, 0, 0, 0],
         [0, 0, 0, 0],
@@ -42,7 +53,8 @@ export default {
       handler(val) {
         if (
           this.currentPos.x === this.dest.x &&
-          this.currentPos.y === this.dest.y
+          this.currentPos.y === this.dest.y &&
+          this.restartOnComplete
         ) {
           this.reset()
         }
@@ -55,9 +67,11 @@ export default {
   },
   mounted() {
     window.addEventListener("keydown", this.onKeyPress)
+    window.addEventListener("resize", this.onResize)
   },
   beforeDestroy() {
     window.removeEventListener("keydown", this.onKeyPress)
+    window.removeEventListener("resize", this.onResize)
   },
   methods: {
     reset() {
