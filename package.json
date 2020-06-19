@@ -13,29 +13,29 @@
     "test": "jest"
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
+    "@nuxtjs/axios": "^5.11.0",
     "@nuxtjs/bulma": "^1.2.1",
-    "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/pwa": "^3.0.0-0"
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "nuxt": "^2.13.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
-    "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/eslint-module": "^1.2.0",
     "@nuxtjs/style-resources": "^1.0.0",
-    "@vue/test-utils": "^1.0.0-beta.27",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
     "eslint": "^6.1.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-loader": "^4.0.0",
-    "eslint-plugin-nuxt": ">=0.4.2",
-    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
     "jest": "^24.1.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "nuxtjs-mdi-font": "^1.0.2",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
-    "vue-jest": "^4.0.0-0"
+    "vue-jest": "^4.0.0-beta.3"
   }
 }
