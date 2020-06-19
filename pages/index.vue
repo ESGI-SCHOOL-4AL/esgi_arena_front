@@ -1,30 +1,22 @@
 <template>
-  <section class="hero is-primary is-fullheight-with-navbar">
-    <div class="hero-body">
-      <div class="container">
-        <div class="columns">
-          <div v-for="(g, i) in games" :key="i" class="column">
-            <nuxt-link :to="g.page">
-              <div class="card game">
-                <div class="card-content">
-                  <div class="content is-flex is-flex-column is-centered">
-                    <b-icon
-                      :icon="g.icon"
-                      size="is-large"
-                      icon-size="mdi-48px"
-                    />
-                    <p class="card-header-title is-size-4 is-centered">
-                      {{ g.name }}
-                    </p>
-                  </div>
-                </div>
+  <div class="container">
+    <div class="columns">
+      <div v-for="(g, i) in games" :key="i" class="column">
+        <nuxt-link :to="g.page">
+          <div class="card game">
+            <div class="card-content">
+              <div class="content is-flex is-flex-column is-centered">
+                <b-icon :icon="g.icon" size="is-large" icon-size="mdi-48px" />
+                <p class="card-header-title is-size-4 is-centered">
+                  {{ g.name }}
+                </p>
               </div>
-            </nuxt-link>
+            </div>
           </div>
-        </div>
+        </nuxt-link>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>

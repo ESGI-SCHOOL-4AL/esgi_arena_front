@@ -2,8 +2,13 @@
   <div class="is-flex is-flex-column">
     <b-navbar />
     <section class="main-content">
-      <nuxt />
-      <!-- TODO refactor include hero -->
+      <div class="hero is-primary is-fullheight-with-navbar">
+        <div class="hero-body">
+          <div class="container">
+            <nuxt />
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </template>
