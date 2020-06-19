@@ -1,0 +1,82 @@
+.is-flex.is-centered {
+  justify-content: center;
+
+  & > * {
+    align-self: center;
+  }
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.is-absolute-centered {
+  margin: auto;
+}
+
+.is-flex-column {
+  flex-direction: column;
+}
+
+.is-flex-space-evenly {
+  justify-content: space-evenly;
+}
+
+.is-fullheight {
+  height: 100%;
+}
+
+.column.is-vcentered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section.is-vcentered {
+  display: flex;
+  align-items: center;
+}
+
+.columns.reverse {
+  flex-direction: row-reverse;
+}
+
+.column.reverse {
+  flex-direction: column-reverse;
+}
+
+ul.is-marginless {
+  margin-left: 2em !important;
+}
+
+@media screen and (min-width: $tablet) {
+  .is-visible-mobile {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: $tablet - 1px) {
+  .columns.reverse-mobile {
+    flex-direction: row-reverse;
+  }
+
+  .column.reverse-mobile {
+    flex-direction: column-reverse;
+  }
+}
+
+@each $name, $breakpoint in $breakpoints {
+  @media screen and (min-width: $breakpoint) {
+    .is-vcentered-#{$name} {
+      align-items: center;
+    }
+
+    .columns.reverse-#{$name} {
+      flex-direction: row-reverse;
+    }
+
+    .column.reverse-#{$name} {
+      flex-direction: column-reverse;
+    }
+  }
+}

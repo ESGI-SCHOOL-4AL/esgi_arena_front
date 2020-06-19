@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <nuxt />
+  <div class="is-flex is-flex-column">
+    <b-navbar />
+    <section class="main-content">
+      <nuxt />
+    </section>
   </div>
 </template>
 

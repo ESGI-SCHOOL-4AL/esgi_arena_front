@@ -1,4 +1,7 @@
 @import "vars/colors";
+@import "vars/breakpoints";
+
+@import "~bulma";
 
 .control-button {
   width: 40px;
@@ -39,3 +42,5 @@
 ::-moz-focus-inner {
   border: 0;
 }
+
+@import "layout";

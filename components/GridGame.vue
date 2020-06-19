@@ -71,6 +71,7 @@ export default {
     },
     onKeyPress(e) {
       if (e.code.indexOf("Arrow") === 0) {
+        e.preventDefault()
         this.onMovePressed(e.code.substring(5).toLowerCase())
       }
     },
