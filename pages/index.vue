@@ -1,18 +1,25 @@
 <template>
   <div class="container">
-    <div class="columns">
-      <div v-for="(g, i) in games" :key="i" class="column">
-        <nuxt-link :to="g.page">
-          <div class="card game">
-            <div class="card-content">
-              <div class="content is-flex is-flex-column is-centered">
-                <b-icon :icon="g.icon" size="is-large" icon-size="mdi-48px" />
-                <p class="card-header-title is-size-4 is-centered">
-                  {{ g.name }}
-                </p>
-              </div>
-            </div>
-          </div>
+    <div class="card">
+      <div class="card-content has-text-centered">
+        <h1 class="title is-1 has-text-dark">
+          ESGI ARENA
+        </h1>
+        <h4 class="subtitle is-4 has-text-grey">
+          Bienvenue
+        </h4>
+        <nuxt-link
+          v-if="!$auth.loggedIn"
+          to="/register"
+          class="button is-primary"
+        >
+          <strong>Inscription</strong>
+        </nuxt-link>
+        <nuxt-link v-if="!$auth.loggedIn" to="/login" class="button is-light">
+          Connexion
+        </nuxt-link>
+        <nuxt-link v-if="$auth.loggedIn" to="/games" class="button is-primary">
+          Jouer !
         </nuxt-link>
       </div>
     </div>
@@ -21,43 +28,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      games: {
-        shortestPath: {
-          name: "Chemin le plus court",
-          icon: "map-marker-path",
-          page: "/shortest-path"
-        },
-        pathCoount: {
-          name: "Nombre de chemins",
-          icon: "routes",
-          page: "/path-count"
-        },
-        baguenaudier: {
-          name: "Baguenaudier",
-          icon: "animation",
-          page: "/baguenaudier"
-        }
-      }
-    }
-  }
+  auth: false
 }
 </script>
-
-<style lang="scss">
-.game {
-  .icon {
-    width: 6rem;
-    height: 6rem;
-    .mdi:before {
-      font-size: 6rem !important;
-    }
-  }
-
-  &:hover {
-    cursor: pointer;
-    background-color: $light;
-  }
-}
-</style>

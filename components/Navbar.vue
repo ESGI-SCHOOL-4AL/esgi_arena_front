@@ -19,7 +19,16 @@
     <div :class="{ 'navbar-menu': true, 'is-active': isActive }">
       <div class="navbar-end">
         <div class="navbar-item">
-          <div class="buttons">
+          <div v-if="$auth.loggedIn" class="buttons is-flex">
+            <span class="navbar-span">
+              Bonjour,
+              {{ $auth.user.username }}
+            </span>
+            <button class="button is-light" @click="$auth.logout()">
+              Déconnexion
+            </button>
+          </div>
+          <div v-else class="buttons">
             <nuxt-link to="/register" class="button is-primary">
               <strong>Inscription</strong>
             </nuxt-link>
@@ -43,3 +52,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.navbar-span {
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+}
+</style>

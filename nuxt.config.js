@@ -48,13 +48,58 @@ export default {
     "@nuxtjs/bulma",
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
-    "@nuxtjs/pwa"
+    "@nuxtjs/pwa",
+    "@nuxtjs/auth"
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    // TODO handle multiple envs
+    baseURL: "http://localhost:8080",
+    headers: {
+      post: {
+        "Content-Type": "application/json"
+      },
+      put: {
+        "Content-Type": "application/json"
+      },
+      patch: {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  /*
+   ** Auth module configuration
+   ** See https://auth.nuxtjs.org/api/options
+   */
+  auth: {
+    redirect: {
+      login: "/login",
+      logout: "/",
+      callback: "/games",
+      home: "/"
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: "/login", method: "post", propertyName: "token" },
+          logout: { url: "/logout", method: "post" },
+          user: { url: "/user/", method: "get", propertyName: false }
+        },
+        tokenRequired: true,
+        tokenType: "Bearer",
+        globalToken: true,
+        autoFetchUser: true
+      }
+    },
+    resetOnError: true,
+    watchLoggedIn: true
+  },
+  router: {
+    middleware: ["auth"]
+  },
   /*
    ** Build configuration
    */

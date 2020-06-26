@@ -19,6 +19,11 @@ import Baguenaudier from "~/components/Baguenaudier.vue"
 export default {
   components: {
     Baguenaudier
+  },
+  beforeMount() {
+    if (!this.$auth.loggedIn) {
+      this.$router.push("/login")
+    }
   }
 }
 </script>

@@ -24,6 +24,11 @@ export default {
     window.addEventListener("resize", this.onResize)
     this.onResize()
   },
+  beforeMount() {
+    if (!this.$auth.loggedIn) {
+      this.$router.push("/login")
+    }
+  },
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize)
   },
