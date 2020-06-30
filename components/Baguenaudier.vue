@@ -6,7 +6,7 @@
         class="is-checkradio is-large"
         type="checkbox"
         :value="val.checked"
-        :disabled="val.disabled"
+        :disabled="val.disabled || !enabled"
         :name="'baguenaudier-box-' + index"
       />
       <label :for="'baguenaudier-box-' + index" @click="onClick(val)"></label>
@@ -18,7 +18,8 @@
 export default {
   name: "Baguenaudier",
   props: {
-    size: { type: Number, default: 4 }
+    size: { type: Number, default: 4 },
+    enabled: { type: Boolean, default: true }
   },
   data() {
     return {
@@ -40,6 +41,14 @@ export default {
       if (!val.disabled) {
         val.checked = !val.checked
         this.onChange()
+      }
+    },
+    update(grid) {
+      if (grid.length !== this.size) {
+        throw new Error("Grid length must be the same as the component length")
+      }
+      for (let i = 0; i < this.size; i++) {
+        this.grid[i].checked = grid[i]
       }
     },
     reset() {

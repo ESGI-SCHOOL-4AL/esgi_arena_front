@@ -30,6 +30,27 @@
       <div class="content is-flex is-flex-column is-centered">
         <baguenaudier :size="size" />
       </div>
+      <div class="card">
+        <header class="card-header solution-header" @click="toggleSolution()">
+          <p class="card-header-title">
+            Solution
+          </p>
+          <div class="card-header-icon">
+            <span class="icon">
+              <b-icon
+                :icon="solution ? 'chevron-down' : 'chevron-up'"
+                size="is-medium"
+                icon-size="mdi-24px"
+              />
+            </span>
+          </div>
+        </header>
+        <div :class="{ 'card-content': true, 'is-hidden': !solution }">
+          <div class="content is-flex is-flex-column is-centered">
+            <baguenaudier ref="solution" :size="size" :enabled="false" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -44,13 +65,75 @@ export default {
   transition: "fade",
   data() {
     return {
-      size: 4
+      size: 4,
+      solution: null,
+      interval: null,
+      current: 0
+    }
+  },
+  watch: {
+    size: {
+      handler() {
+        this.stopSolution()
+        this.solution = null
+      }
     }
   },
   beforeMount() {
     if (!this.$auth.loggedIn) {
       this.$router.push("/login")
     }
+  },
+  methods: {
+    async toggleSolution() {
+      if (!this.solution) {
+        await this.fetchSolution()
+        this.playSolution()
+      } else {
+        this.stopSolution()
+        this.solution = null
+      }
+    },
+    async fetchSolution() {
+      try {
+        const res = await this.$axios.$post(
+          "/algorithm/chinese-rings",
+          this.size
+        )
+        this.solution = res
+        for (let i = 0; i < this.solution.length; i++) {
+          for (let j = 0; j < this.solution[i].length; j++) {
+            this.solution[i][j] = !this.solution[i][j]
+          }
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    playSolution() {
+      this.interval = setInterval(() => {
+        this.$refs.solution.update(this.solution[this.current])
+        this.current++
+        if (this.current === this.solution.length) {
+          this.stopSolution()
+        }
+      }, 1000)
+    },
+    stopSolution() {
+      if (this.interval) {
+        clearInterval(this.interval)
+        this.interval = null
+      }
+      this.current = 0
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.solution-header {
+  &:hover {
+    cursor: pointer;
+  }
+}
+</style>
