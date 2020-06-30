@@ -3,35 +3,39 @@
     <p v-if="err" class="p has-text-danger">
       {{ err }}
     </p>
-    <div class="field">
-      <label class="label">Email</label>
-      <div class="control has-icons-left">
-        <b-icon icon="email" size="is-small" icon-size="mdi-24px" />
-        <input
-          v-model="login.username"
-          class="input"
-          type="email"
-          placeholder="Email"
-        />
+    <form @submit.prevent="register">
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left">
+          <b-icon icon="email" size="is-small" icon-size="mdi-24px" />
+          <input
+            v-model="login.username"
+            class="input"
+            type="email"
+            placeholder="Email"
+            required
+          />
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label">Mot de passe</label>
-      <div class="control has-icons-left">
-        <b-icon icon="lock" size="is-small" icon-size="mdi-24px" />
-        <input
-          v-model="login.password"
-          class="input"
-          type="password"
-          placeholder="Mot de passe"
-        />
+      <div class="field">
+        <label class="label">Mot de passe</label>
+        <div class="control has-icons-left">
+          <b-icon icon="lock" size="is-small" icon-size="mdi-24px" />
+          <input
+            v-model="login.password"
+            class="input"
+            type="password"
+            placeholder="Mot de passe"
+            required
+          />
+        </div>
       </div>
-    </div>
-    <div class="control">
-      <button class="button is-primary" @click="register">
-        Envoyer
-      </button>
-    </div>
+      <div class="control">
+        <button class="button is-primary" type="submit">
+          Envoyer
+        </button>
+      </div>
+    </form>
     <p class="p">
       Vous possédez déjà un compte ?
       <nuxt-link to="/login">
