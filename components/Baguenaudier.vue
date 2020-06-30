@@ -25,12 +25,15 @@ export default {
       grid: []
     }
   },
-  beforeMount() {
-    this.grid = []
-    for (let i = 0; i < this.size; i++) {
-      this.grid.push({ checked: true, disabled: true })
+  watch: {
+    size: {
+      handler(val) {
+        this.reset()
+      }
     }
-    this.onChange()
+  },
+  beforeMount() {
+    this.reset()
   },
   methods: {
     onClick(val) {
@@ -38,6 +41,13 @@ export default {
         val.checked = !val.checked
         this.onChange()
       }
+    },
+    reset() {
+      this.grid = []
+      for (let i = 0; i < this.size; i++) {
+        this.grid.push({ checked: true, disabled: true })
+      }
+      this.onChange()
     },
     onChange() {
       if (this.checkVictory()) {
