@@ -46,6 +46,7 @@ import Auth from "~/components/Auth.vue"
 
 export default {
   components: { Auth },
+  transition: "fade",
   data() {
     return {
       login: {

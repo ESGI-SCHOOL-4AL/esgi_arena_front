@@ -32,9 +32,6 @@ export default {
     MoveControls,
     PathGrid
   },
-  props: {
-    restartOnComplete: { type: Boolean, default: true }
-  },
   data() {
     return {
       width: 400,
@@ -47,6 +44,7 @@ export default {
       ],
       path: [{ x: 0, y: 0 }],
       currentPos: { x: 0, y: 0 },
+      start: { x: 0, y: 0 },
       dest: { x: 0, y: 0 }
     }
   },
@@ -55,10 +53,9 @@ export default {
       handler(val) {
         if (
           this.currentPos.x === this.dest.x &&
-          this.currentPos.y === this.dest.y &&
-          this.restartOnComplete
+          this.currentPos.y === this.dest.y
         ) {
-          this.reset()
+          this.$emit("end")
         }
       },
       deep: true
@@ -81,9 +78,14 @@ export default {
       const level = Generator.generate(size)
       this.terrain = level.grid
       this.path = [{ x: 0, y: 0 }]
-      Object.assign(this.currentPos, level.start)
-      Object.assign(this.path[0], level.start)
+      Object.assign(this.start, level.start)
+      this.resetPath()
       Object.assign(this.dest, level.end)
+    },
+    resetPath() {
+      this.path = [{ x: 0, y: 0 }]
+      Object.assign(this.currentPos, this.start)
+      Object.assign(this.path[0], this.start)
     },
     onKeyPress(e) {
       if (e.code.indexOf("Arrow") === 0) {

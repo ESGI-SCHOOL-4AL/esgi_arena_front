@@ -20,6 +20,7 @@ export default {
   components: {
     Baguenaudier
   },
+  transition: "fade",
   beforeMount() {
     if (!this.$auth.loggedIn) {
       this.$router.push("/login")

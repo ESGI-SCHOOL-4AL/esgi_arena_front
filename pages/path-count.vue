@@ -7,7 +7,7 @@
     </header>
     <div class="card-content">
       <div ref="content" class="content is-flex is-flex-column is-centered">
-        <grid-game ref="game" :restart-on-complete="false" />
+        <grid-game ref="game" />
         <div class="field has-addons">
           <div class="control has-icons-left">
             <b-icon icon="routes" size="is-small" icon-size="mdi-24px" />
@@ -35,6 +35,7 @@ export default {
   components: {
     GridGame
   },
+  transition: "fade",
   mounted() {
     window.addEventListener("resize", this.onResize)
     this.onResize()
