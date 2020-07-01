@@ -99,6 +99,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.baguenaudier {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .field:last-child {
   label {
     margin-right: 0;
