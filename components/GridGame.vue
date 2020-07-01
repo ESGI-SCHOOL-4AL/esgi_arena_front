@@ -4,7 +4,11 @@
       <span class="moves-counter is-size-5">
         {{ path.length - 1 }} déplacements
       </span>
-      <button class="control-button" title="Réinitialiser" @click="reset()">
+      <button
+        class="control-button reset-button"
+        title="Réinitialiser"
+        @click="reset()"
+      >
         <b-icon icon="refresh" size="is-large" icon-size="mdi-36px" />
       </button>
     </div>
@@ -31,6 +35,9 @@ export default {
   components: {
     MoveControls,
     PathGrid
+  },
+  props: {
+    enabled: { type: Boolean, default: true }
   },
   data() {
     return {
@@ -81,11 +88,15 @@ export default {
       Object.assign(this.start, level.start)
       this.resetPath()
       Object.assign(this.dest, level.end)
+      this.$emit("reset")
     },
     resetPath() {
       this.path = [{ x: 0, y: 0 }]
       Object.assign(this.currentPos, this.start)
       Object.assign(this.path[0], this.start)
+    },
+    pushPath(pos) {
+      this.path.push(pos)
     },
     onKeyPress(e) {
       if (e.code.indexOf("Arrow") === 0) {
@@ -94,6 +105,9 @@ export default {
       }
     },
     onMovePressed(direction) {
+      if (!this.enabled) {
+        return
+      }
       const newPos = Object.assign({}, this.currentPos)
       switch (direction) {
         case "up":
@@ -167,6 +181,10 @@ export default {
 
   .control-button {
     margin: 0;
+  }
+
+  .reset-button {
+    z-index: 2;
   }
 }
 </style>
