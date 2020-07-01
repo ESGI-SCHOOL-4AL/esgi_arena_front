@@ -58,4 +58,29 @@ export default {
   margin-bottom: 0.5rem;
   margin-right: 0.5rem;
 }
+
+@media screen and (max-width: 768px) {
+  .navbar-menu {
+    transition: transform 0.5s ease;
+    transform: translateX(100%);
+    position: absolute;
+    right: 0;
+    height: calc(100vh - #{$navbar-height});
+    display: block !important;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+    &.is-active {
+      transform: translateX(0);
+    }
+
+    .navbar-item .buttons {
+      display: flex;
+      flex-direction: column;
+
+      .button {
+        margin-right: 0;
+      }
+    }
+  }
+}
 </style>
