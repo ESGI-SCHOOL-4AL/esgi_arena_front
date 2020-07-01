@@ -5,6 +5,7 @@
         {{ path.length - 1 }} déplacements
       </span>
       <button
+        v-if="controls"
         class="control-button reset-button"
         title="Réinitialiser"
         @click="reset()"
@@ -19,7 +20,7 @@
       :width="width"
       :height="height"
     />
-    <div>
+    <div v-if="controls">
       <move-controls @movePressed="onMovePressed" />
     </div>
   </div>
@@ -37,7 +38,10 @@ export default {
     PathGrid
   },
   props: {
-    enabled: { type: Boolean, default: true }
+    enabled: { type: Boolean, default: true },
+    minSize: { type: Number, default: 10 },
+    maxSize: { type: Number, default: 20 },
+    controls: { type: Boolean, default: true }
   },
   data() {
     return {
@@ -81,7 +85,9 @@ export default {
   },
   methods: {
     reset() {
-      const size = Math.floor(Math.random() * 11 + 10)
+      const size = Math.floor(
+        Math.random() * (this.maxSize - this.minSize + 1) + this.minSize
+      )
       const level = Generator.generate(size)
       this.terrain = level.grid
       this.path = [{ x: 0, y: 0 }]
@@ -97,6 +103,22 @@ export default {
     },
     pushPath(pos) {
       this.path.push(pos)
+    },
+    setPath(path) {
+      this.path = path
+    },
+    setTerrain(terrain) {
+      this.terrain = terrain
+    },
+    setStart(pos) {
+      this.start = pos
+    },
+    setDest(pos) {
+      this.dest = pos
+    },
+    setDimensions(width, height) {
+      this.width = width
+      this.height = height
     },
     onKeyPress(e) {
       if (e.code.indexOf("Arrow") === 0) {
